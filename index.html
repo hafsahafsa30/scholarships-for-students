@@ -752,7 +752,73 @@ function toggleLanguage() {
 }
 
 displayScholarships(scholarships);
+document.getElementById("searchButton").addEventListener("click", function () {
+    const searchText = document.getElementById("searchInput").value.toLowerCase().trim();
 
+    const selectedCountry = document.getElementById("countryFilter").value;
+    const selectedLevel = document.getElementById("levelFilter").value;
+    const selectedFunding = document.getElementById("fundingFilter").value;
+
+    const filtered = scholarships.filter(scholarship => {
+        const matchesSearch =
+            searchText === "" ||
+            scholarship.title.toLowerCase().includes(searchText) ||
+            scholarship.country.toLowerCase().includes(searchText) ||
+            scholarship.field.toLowerCase().includes(searchText);
+
+        const matchesCountry =
+            selectedCountry === "" ||
+            scholarship.country === selectedCountry;
+
+        const matchesLevel =
+            selectedLevel === "" ||
+            scholarship.level === selectedLevel;
+
+        const matchesFunding =
+            selectedFunding === "" ||
+            scholarship.funding === selectedFunding;
+
+        return matchesSearch && matchesCountry && matchesLevel && matchesFunding;
+    });
+
+    displayScholarships(filtered);
+});
+
+document.getElementById("countryFilter").addEventListener("change", filterScholarships);
+document.getElementById("levelFilter").addEventListener("change", filterScholarships);
+document.getElementById("fundingFilter").addEventListener("change", filterScholarships);
+
+function filterScholarships() {
+    const searchText = document.getElementById("searchInput").value.toLowerCase().trim();
+
+    const selectedCountry = document.getElementById("countryFilter").value;
+    const selectedLevel = document.getElementById("levelFilter").value;
+    const selectedFunding = document.getElementById("fundingFilter").value;
+
+    const filtered = scholarships.filter(scholarship => {
+        const matchesSearch =
+            searchText === "" ||
+            scholarship.title.toLowerCase().includes(searchText) ||
+            scholarship.country.toLowerCase().includes(searchText) ||
+            scholarship.field.toLowerCase().includes(searchText);
+
+        const matchesCountry =
+            selectedCountry === "" ||
+            scholarship.country === selectedCountry;
+
+        const matchesLevel =
+            selectedLevel === "" ||
+            scholarship.level === selectedLevel;
+
+        const matchesFunding =
+            selectedFunding === "" ||
+            scholarship.funding === selectedFunding;
+
+        return matchesSearch && matchesCountry && matchesLevel && matchesFunding;
+    });
+
+    displayScholarships(filtered);
+    }
 </script>
 
 </body>

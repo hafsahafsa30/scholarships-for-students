@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Scholarships for Students</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap');
+
+:root {
+    --navy: #19354D;
+    --blue: #DDEBF2;
+    --blue-light: #F1F6F8;
+    --sage: #AFC4B6;
+    --cream: #FAFBF9;
+    --white: #FFFFFF;
+    --text: #263746;
+    --muted: #71808C;
+    --border: #E2E9ED;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+body.arabic {
+    font-family: "Noto Sans Arabic", sans-serif;
+    direction: rtl;
+}
+
+header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar {
+    max-width: 1150px;
+    margin: auto;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy);
+}
+
+.nav-right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.lang-button {
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--navy);
+    padding: 8px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.hero {
+    text-align: center;
+    padding: 90px 20px 75px;
+    background: var(--blue-light);
+}
+
+.hero h1 {
+    font-size: clamp(38px, 6vw, 64px);
+    line-height: 1.1;
+    color: var(--navy);
+    margin-bottom: 20px;
+}
+
+.hero p {
+    max-width: 650px;
+    margin: 0 auto 35px;
+    color: var(--muted);
+    font-size: 18px;
+}
+
+.search-container {
+    max-width: 750px;
+    margin: auto;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 8px;
+    display: flex;
+    box-shadow: 0 8px 25px rgba(25, 53, 77, 0.06);
+}
+
+.search-container input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 15px;
+    font-size: 16px;
+    background: transparent;
+    color: var(--text);
+}
+
+.search-container button {
+    border: none;
+    background: var(--navy);
+    color: white;
+    padding: 0 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.section {
+    max-width: 1150px;
+    margin: auto;
+    padding: 65px 24px;
+}
+
+.section-title {
+    color: var(--navy);
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 35px;
+}
+
+select {
+    padding: 12px 15px;
+    border-radius: 9px;
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--text);
+    cursor: pointer;
+}
+
+.scholarship-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(25, 53, 77, 0.08);
+}
+
+.card h3 {
+    color: var(--navy);
+    margin-bottom: 12px;
+}
+
+.badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 12px 0;
+}
+
+.badge {
+    background: var(--blue);
+    color: var(--navy);
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.card-info {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 6px 0;
+}
+
+.details-button {
+    margin-top: 18px;
+    width: 100%;
+    border: none;
+    background: var(--navy);
+    color: white;
+    padding: 12px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.empty {
+    text-align: center;
+    padding: 50px;
+    color: var(--muted);
+}
+
+.browse {
+    background: var(--white);
+}
+
+.browse-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 15px;
+}
+
+.browse-item {
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--cream);
+    cursor: pointer;
+}
+
+.browse-item strong {
+    color: var(--navy);
+}
+
+footer {
+    background: var(--navy);
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+    margin-top: 40px;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 35, 45, 0.45);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 200;
+}
+
+.modal-content {
+    background: white;
+    max-width: 700px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 18px;
+    padding: 30px;
+}
+
+.close {
+    float: right;
+    border: none;
+    background: none;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.modal h2 {
+    color: var(--navy);
+    margin-bottom: 15px;
+}
+
+.modal h4 {
+    margin-top: 20px;
+    color: var(--navy);
+}
+
+.apply {
+    display: inline-block;
+    margin-top: 25px;
+    background: var(--navy);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 9px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+@media(max-width: 600px) {
+    .search-container {
+        flex-direction: column;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        gap: 8px;
+    }
+
+    .search-container input {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+    }
+
+    .search-container button {
+        padding: 13px;
+    }
+
+    .hero {
+        padding-top: 60px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="navbar">
+        <div class="logo">Scholarships for Students</div>
+
+        <div class="nav-right">
+            <button class="lang-button" onclick="toggleLanguage()" id="languageButton">
+                العربية
+            </button>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+
+    <h1 id="heroTitle">Scholarships for Students</h1>
+
+    <p id="heroSubtitle">
+        Discover scholarship opportunities from around the world and find the one that's right for you.
+    </p>
+
+    <div class="search-container">
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="Search scholarships worldwide..."
+            onkeyup="searchScholarships()"
+        >
+
+        <button onclick="searchScholarships()" id="searchButton">
+            Search
+        </button>
+    </div>
+
+</section>
+
+<section class="section">
+
+    <h2 class="section-title" id="exploreTitle">
+        Explore Scholarships
+    </h2>
+
+    <div class="filters">
+
+        <select id="countryFilter" onchange="filterScholarships()">
+            <option value="">All destinations</option>
+            <option value="USA">USA</option>
+            <option value="UK">United Kingdom</option>
+            <option value="Japan">Japan</option>
+            <option value="Germany">Germany</option>
+            <option value="Canada">Canada</option>
+        </select>
+
+        <select id="levelFilter" onchange="filterScholarships()">
+            <option value="">All study levels</option>
+            <option value="High School">High School</option>
+            <option value="Bachelor">Bachelor's</option>
+            <option value="Master">Master's</option>
+            <option value="PhD">PhD</option>
+        </select>
+
+        <select id="fundingFilter" onchange="filterScholarships()">
+            <option value="">All funding types</option>
+            <option value="Fully Funded">Fully Funded</option>
+            <option value="Partial">Partial Funding</option>
+        </select>
+
+    </div>
+
+    <div id="scholarshipGrid" class="scholarship-grid"></div>
+
+</section>
+
+<section class="section browse">
+
+    <h2 class="section-title" id="browseTitle">
+        Browse by
+    </h2>
+
+    <div class="browse-grid">
+
+        <div class="browse-item" onclick="setFilter('country','USA')">
+            🌎 <strong>Destination</strong>
+            <p>Find scholarships by country.</p>
+        </div>
+
+        <div class="browse-item" onclick="setFilter('level','Bachelor')">
+            🎓 <strong>Study Level</strong>
+            <p>High school, Bachelor's, Master's and PhD.</p>
+        </div>
+
+        <div class="browse-item" onclick="setFilter('funding','Fully Funded')">
+            💰 <strong>Funding</strong>
+            <p>Explore fully funded opportunities.</p>
+        </div>
+
+        <div class="browse-item">
+            📚 <strong>Field of Study</strong>
+            <p>Business, engineering, medicine and more.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    <p>Scholarships for Students</p>
+    <p>Helping students discover opportunities worldwide.</p>
+</footer>
+
+<div class="modal" id="modal">
+
+    <div class="modal-content">
+
+        <button class="close" onclick="closeModal()">×</button>
+
+        <div id="modalContent"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+const scholarships = [
+
+{
+    id: 1,
+    name: "Global Excellence Scholarship",
+    country: "USA",
+    university: "Example University",
+    level: "Bachelor",
+    funding: "Fully Funded",
+    field: "Multiple Fields",
+    deadline: "March 15",
+    description: "A scholarship opportunity for international students with strong academic achievement.",
+    requirements: [
+        "Strong academic record",
+        "International student status",
+        "Personal statement",
+        "Academic transcripts"
+    ],
+    application: "Submit the required documents through the university's official application portal."
+},
+
+{
+    id: 2,
+    name: "International Student Scholarship",
+    country: "Canada",
+    university: "Example Canadian University",
+    level: "Bachelor",
+    funding: "Partial",
+    field: "Multiple Fields",
+    deadline: "April 20",
+    description: "Financial support for international students beginning undergraduate studies.",
+    requirements: [
+        "Admission to the university",
+        "Academic transcripts",
+        "Personal statement"
+    ],
+    application: "Apply through the university's official scholarship portal."
+},
+
+{
+    id: 3,
+    name: "International Excellence Award",
+    country: "UK",
+    university: "Example UK University",
+    level: "Master",
+    funding: "Partial",
+    field: "Multiple Fields",
+    deadline: "June 1",
+    description: "An award designed to support outstanding international postgraduate students.",
+    requirements: [
+        "Bachelor's degree",
+        "Strong academic performance",
+        "Personal statement"
+    ],
+    application: "Follow the official university application process."
+},
+
+{
+    id: 4,
+    name: "Japan Global Scholarship",
+    country: "Japan",
+    university: "Example Japanese University",
+    level: "Bachelor",
+    funding: "Fully Funded",
+    field: "Multiple Fields",
+    deadline: "May 10",
+    description: "A fully funded opportunity for international students interested in studying in Japan.",
+    requirements: [
+        "Academic transcripts",
+        "Proof of eligibility",
+        "Recommendation letter",
+        "Personal statement"
+    ],
+    application: "Apply through the official scholarship application system."
+}
+
+];
+
+function displayScholarships(list) {
+
+    const grid = document.getElementById("scholarshipGrid");
+
+    grid.innerHTML = "";
+
+    if (list.length === 0) {
+
+        grid.innerHTML =
+            '<div class="empty">No scholarships found. Try another search.</div>';
+
+        return;
+    }
+
+    list.forEach(s => {
+
+        const card = document.createElement("div");
+
+        card.className = "card";
+
+        card.innerHTML = `
+
+            <h3>${s.name}</h3>
+
+            <div class="badges">
+                <span class="badge">${s.country}</span>
+                <span class="badge">${s.level}</span>
+                <span class="badge">${s.funding}</span>
+            </div>
+
+            <p class="card-info">🎓 ${s.university}</p>
+            <p class="card-info">📚 ${s.field}</p>
+            <p class="card-info">📅 Deadline: ${s.deadline}</p>
+
+            <button class="details-button"
+                onclick="showDetails(${s.id})">
+                View Scholarship
+            </button>
+        `;
+
+        grid.appendChild(card);
+
+    });
+}
+
+function searchScholarships() {
+
+    const query =
+        document.getElementById("searchInput").value.toLowerCase();
+
+    const results = scholarships.filter(s =>
+
+        Object.values(s).join(" ").toLowerCase().includes(query)
+
+    );
+
+    displayScholarships(results);
+}
+
+function filterScholarships() {
+
+    const country =
+        document.getElementById("countryFilter").value;
+
+    const level =
+        document.getElementById("levelFilter").value;
+
+    const funding =
+        document.getElementById("fundingFilter").value;
+
+    const query =
+        document.getElementById("searchInput").value.toLowerCase();
+
+    const results = scholarships.filter(s => {
+
+        const matchesCountry =
+            !country || s.country === country;
+
+        const matchesLevel =
+            !level || s.level === level;
+
+        const matchesFunding =
+            !funding || s.funding === funding;
+
+        const matchesSearch =
+            !query ||
+            Object.values(s).join(" ").toLowerCase().includes(query);
+
+        return matchesCountry &&
+               matchesLevel &&
+               matchesFunding &&
+               matchesSearch;
+    });
+
+    displayScholarships(results);
+}
+
+function showDetails(id) {
+
+    const s = scholarships.find(x => x.id === id);
+
+    document.getElementById("modalContent").innerHTML = `
+
+        <h2>${s.name}</h2>
+
+        <p>${s.description}</p>
+
+        <div class="badges">
+            <span class="badge">${s.country}</span>
+            <span class="badge">${s.level}</span>
+            <span class="badge">${s.funding}</span>
+        </div>
+
+        <h4>University</h4>
+        <p>${s.university}</p>
+
+        <h4>Deadline</h4>
+        <p>${s.deadline}</p>
+
+        <h4>Requirements</h4>
+
+        <ul>
+            ${s.requirements.map(r => `<li>${r}</li>`).join("")}
+        </ul>
+
+        <h4>How to apply</h4>
+        <p>${s.application}</p>
+
+        <a href="#" class="apply">
+            Official Application →
+        </a>
+    `;
+
+    document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+function setFilter(type, value) {
+
+    if (type === "country") {
+        document.getElementById("countryFilter").value = value;
+    }
+
+    if (type === "level") {
+        document.getElementById("levelFilter").value = value;
+    }
+
+    if (type === "funding") {
+        document.getElementById("fundingFilter").value = value;
+    }
+
+    filterScholarships();
+
+    window.scrollTo({
+        top: document.querySelector(".section").offsetTop,
+        behavior: "smooth"
+    });
+}
+
+function toggleLanguage() {
+
+    const body = document.body;
+
+    const arabic = body.classList.toggle("arabic");
+
+    const button =
+        document.getElementById("languageButton");
+
+    if (arabic) {
+
+        document.documentElement.lang = "ar";
+
+        button.innerText = "English";
+
+        document.getElementById("heroTitle").innerText =
+            "منح دراسية للطلاب";
+
+        document.getElementById("heroSubtitle").innerText =
+            "اكتشف فرص المنح الدراسية من جميع أنحاء العالم وابحث عن الفرصة المناسبة لك.";
+
+        document.getElementById("searchInput").placeholder =
+            "ابحث عن المنح الدراسية حول العالم...";
+
+        document.getElementById("searchButton").innerText =
+            "بحث";
+
+        document.getElementById("exploreTitle").innerText =
+            "استكشف المنح الدراسية";
+
+        document.getElementById("browseTitle").innerText =
+            "تصفح حسب";
+
+    } else {
+
+        document.documentElement.lang = "en";
+
+        button.innerText = "العربية";
+
+        document.getElementById("heroTitle").innerText =
+            "Scholarships for Students";
+
+        document.getElementById("heroSubtitle").innerText =
+            "Discover scholarship opportunities from around the world and find the one that's right for you.";
+
+        document.getElementById("searchInput").placeholder =
+            "Search scholarships worldwide...";
+
+        document.getElementById("searchButton").innerText =
+            "Search";
+
+        document.getElementById("exploreTitle").innerText =
+            "Explore Scholarships";
+
+        document.getElementById("browseTitle").innerText =
+            "Browse by";
+    }
+}
+
+displayScholarships(scholarships);
+
+</script>
+
+</body>
+  </html>

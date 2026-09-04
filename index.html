@@ -1,1231 +1,719 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Scholarships for Students</title>
+  <title>Scholarships for Students</title>
 
-<style>
-:root {
-    --warm-white: #FAFBF9;
-    --soft-blue: #DDEBF2;
-    --deep-navy: #19354D;
-    --sage: #AFC4B6;
-    --gray: #71808C;
-    --gold: #D8B56A;
-    --white: #FFFFFF;
-    --border: #E3E9EC;
-}
+  <meta
+    name="description"
+    content="Discover scholarships, international schools, summer programs and competitions made for students around the world."
+  >
 
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: var(--warm-white);
-    color: var(--deep-navy);
-    line-height: 1.6;
-}
-
-nav {
-    background: var(--white);
-    border-bottom: 1px solid var(--border);
-    padding: 18px 6%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.logo {
-    font-weight: 700;
-    font-size: 18px;
-}
-
-#languageButton {
-    border: none;
-    background: var(--soft-blue);
-    color: var(--deep-navy);
-    padding: 9px 15px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-.hero {
-    text-align: center;
-    padding: 70px 20px 45px;
-    background: linear-gradient(
-        to bottom,
-        var(--soft-blue),
-        var(--warm-white)
-    );
-}
-
-.hero h1 {
-    font-size: clamp(38px, 7vw, 68px);
-    margin: 0 0 12px;
-    letter-spacing: -1px;
-}
-
-.hero p {
-    max-width: 700px;
-    margin: 0 auto 30px;
-    color: var(--gray);
-    font-size: 18px;
-}
-
-.search-container {
-    max-width: 850px;
-    margin: auto;
-    display: flex;
-    gap: 10px;
-}
-
-#searchInput {
-    flex: 1;
-    padding: 17px 20px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    font-size: 16px;
-    outline: none;
-    background: white;
-}
-
-#searchInput:focus {
-    border-color: var(--sage);
-}
-
-#searchButton {
-    border: none;
-    border-radius: 12px;
-    padding: 0 25px;
-    background: var(--deep-navy);
-    color: white;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 16px;
-}
-
-.filters {
-    max-width: 1100px;
-    margin: 30px auto;
-    padding: 0 20px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-}
-
-select {
-    width: 100%;
-    padding: 14px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    background: white;
-    color: var(--deep-navy);
-}
-
-.section {
-    max-width: 1150px;
-    margin: 55px auto;
-    padding: 0 20px;
-}
-
-.section h2 {
-    font-size: 30px;
-    margin-bottom: 20px;
-}
-
-.browse-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-}
-
-.browse-button {
-    border: 1px solid var(--border);
-    background: white;
-    padding: 18px;
-    border-radius: 12px;
-    cursor: pointer;
-    text-align: left;
-    color: var(--deep-navy);
-    transition: 0.2s;
-}
-
-.browse-button:hover {
-    transform: translateY(-2px);
-    border-color: var(--sage);
-}
-
-.results-info {
-    color: var(--gray);
-    margin-bottom: 18px;
-}
-
-.scholarship-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 5px 20px rgba(25, 53, 77, 0.05);
-    display: flex;
-    flex-direction: column;
-}
-
-.card h3 {
-    margin-top: 0;
-    margin-bottom: 8px;
-    font-size: 21px;
-}
-
-.organization {
-    color: var(--gray);
-    margin-bottom: 15px;
-}
-
-.tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-    margin-bottom: 15px;
-}
-
-.tag {
-    background: var(--soft-blue);
-    color: var(--deep-navy);
-    padding: 5px 9px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.card-description {
-    color: var(--gray);
-    flex-grow: 1;
-}
-
-.card button {
-    margin-top: 18px;
-    padding: 12px;
-    border: none;
-    border-radius: 9px;
-    background: var(--deep-navy);
-    color: white;
-    cursor: pointer;
-    font-weight: 700;
-}
-
-.no-results {
-    text-align: center;
-    padding: 50px 20px;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 15px;
-    color: var(--gray);
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(25, 53, 77, 0.45);
-    z-index: 200;
-    padding: 25px;
-    overflow-y: auto;
-}
-
-.modal-content {
-    max-width: 750px;
-    margin: 40px auto;
-    background: white;
-    border-radius: 18px;
-    padding: 30px;
-    position: relative;
-}
-
-.close {
-    position: absolute;
-    right: 20px;
-    top: 15px;
-    border: none;
-    background: none;
-    font-size: 28px;
-    cursor: pointer;
-    color: var(--gray);
-}
-
-.apply-button {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 13px 20px;
-    border-radius: 10px;
-    background: var(--deep-navy);
-    color: white;
-    text-decoration: none;
-    font-weight: 700;
-}
-
-footer {
-    margin-top: 70px;
-    padding: 35px 20px;
-    text-align: center;
-    background: var(--deep-navy);
-    color: white;
-}
-
-[dir="rtl"] {
-    direction: rtl;
-}
-
-[dir="rtl"] .browse-button {
-    text-align: right;
-}
-
-@media (max-width: 850px) {
-    .scholarship-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .browse-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .filters {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 600px) {
-    nav {
-        padding: 15px 5%;
-    }
-
-    .hero {
-        padding-top: 50px;
-    }
-
-    .search-container {
-        flex-direction: column;
-    }
-
-    #searchButton {
-        padding: 14px;
-    }
-
-    .scholarship-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .browse-grid {
-        grid-template-columns: 1fr;
-    }
-}
-</style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<nav>
-    <div class="logo">Scholarships for Students</div>
-    <button id="languageButton">العربية</button>
-</nav>
+  <!-- =========================================
+       HEADER
+  ========================================== -->
 
-<section class="hero">
-    <h1 id="mainTitle">Scholarships for Students</h1>
+  <header class="site-header">
 
-    <p id="mainSubtitle">
-        Discover scholarship opportunities from universities,
-        governments, and organizations around the world.
-    </p>
+    <a href="#" class="brand" onclick="showHome()">
+      Scholarships for Students
+    </a>
 
-    <div class="search-container">
-        <input
-            id="searchInput"
-            type="text"
-            placeholder="Search scholarships, universities, countries, fields..."
+    <button
+      class="menu-button"
+      id="menuButton"
+      aria-label="Open menu"
+      aria-expanded="false"
+    >
+      ☰
+    </button>
+
+    <nav class="side-menu" id="sideMenu">
+
+      <button class="close-menu" id="closeMenu" aria-label="Close menu">
+        ×
+      </button>
+
+      <a href="#" onclick="showHome(); closeSideMenu();">
+        Home
+      </a>
+
+      <button onclick="showAbout(); closeSideMenu();">
+        About This Website
+      </button>
+
+      <button onclick="showSaved(); closeSideMenu();">
+        Saved Opportunities
+      </button>
+
+      <div class="menu-divider"></div>
+
+      <p class="menu-contact-title">Contact</p>
+
+      <a href="mailto:hafsaelmasmoudi2@gmail.com">
+        hafsaelmasmoudi2@gmail.com
+      </a>
+
+    </nav>
+
+  </header>
+
+
+  <!-- =========================================
+       MAIN WEBSITE
+  ========================================== -->
+
+  <main>
+
+
+    <!-- =======================================
+         HOME / HERO
+    ======================================== -->
+
+    <section id="homePage" class="page hero-page">
+
+      <div class="hero-background"></div>
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+
+        <span class="hero-label">
+          EDUCATIONAL OPPORTUNITIES
+        </span>
+
+        <h1>
+          Discover Your Next Opportunity
+        </h1>
+
+        <p>
+          Scholarships, international schools, summer programs,
+          and competitions tailored to students around the world.
+        </p>
+
+        <button
+          class="primary-button"
+          id="startButton"
+          onclick="startQuestionnaire()"
+        >
+          Continue
+          <span>→</span>
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================
+         ABOUT
+    ======================================== -->
+
+    <section id="aboutPage" class="page simple-page hidden">
+
+      <div class="simple-content">
+
+        <span class="section-label">
+          ABOUT
+        </span>
+
+        <h1>
+          Opportunities should be easier to find.
+        </h1>
+
+        <p>
+          Scholarships for Students was created to help students
+          discover educational opportunities that match their
+          situation, goals, and stage of education.
+        </p>
+
+        <p>
+          Instead of searching through countless websites,
+          students can answer a few simple questions and explore
+          opportunities that may be relevant to them.
+        </p>
+
+        <div class="about-box">
+
+          <h3>What can you discover?</h3>
+
+          <div class="about-items">
+
+            <div>
+              <span>🎓</span>
+              <p>Scholarships</p>
+            </div>
+
+            <div>
+              <span>🏫</span>
+              <p>International Schools</p>
+            </div>
+
+            <div>
+              <span>☀️</span>
+              <p>Summer Programs</p>
+            </div>
+
+            <div>
+              <span>🏆</span>
+              <p>Competitions</p>
+            </div>
+
+          </div>
+
+        </div>
+
+        <button
+          class="secondary-button"
+          onclick="showHome()"
+        >
+          Back to Home
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================
+         QUESTIONNAIRE
+    ======================================== -->
+
+    <section id="questionnairePage" class="page questionnaire-page hidden">
+
+      <div class="questionnaire-container">
+
+        <!-- Progress -->
+
+        <div class="progress-area">
+
+          <span id="progressText">
+            Question 1 of 4
+          </span>
+
+          <div class="progress-bar">
+            <div
+              class="progress-fill"
+              id="progressFill"
+            ></div>
+          </div>
+
+        </div>
+
+
+        <!-- QUESTION 1: COUNTRY -->
+
+        <div
+          class="question-screen active"
+          id="question1"
         >
 
-        <button id="searchButton">Search</button>
-    </div>
-</section>
+          <span class="question-number">
+            01
+          </span>
 
-<section class="filters">
+          <h2>
+            Where do you currently live?
+          </h2>
 
-    <select id="countryFilter">
-        <option value="">All destinations</option>
-        <option value="USA">USA</option>
-        <option value="Canada">Canada</option>
-        <option value="United Kingdom">United Kingdom</option>
-        <option value="Japan">Japan</option>
-        <option value="Germany">Germany</option>
-        <option value="Türkiye">Türkiye</option>
-        <option value="Europe">Europe</option>
-        <option value="Worldwide">Worldwide</option>
-    </select>
+          <p>
+            This helps us find opportunities available
+            in your country or region.
+          </p>
 
-    <select id="levelFilter">
-        <option value="">All study levels</option>
-        <option value="Bachelor">Bachelor's</option>
-        <option value="Master">Master's</option>
-        <option value="Doctorate">Doctorate</option>
-        <option value="Graduate">Graduate</option>
-    </select>
+          <div class="country-search">
 
-    <select id="fundingFilter">
-        <option value="">All funding types</option>
-        <option value="Fully funded">Fully funded</option>
-        <option value="Full tuition">Full tuition</option>
-        <option value="Partial">Partial funding</option>
-        <option value="Varies">Varies</option>
-    </select>
+            <input
+              type="text"
+              id="countryInput"
+              placeholder="Search your country..."
+              autocomplete="off"
+            >
 
-</section>
+            <div
+              class="country-results"
+              id="countryResults"
+            ></div>
 
-<section class="section">
+          </div>
 
-    <h2 id="browseTitle">Browse by</h2>
+          <p
+            class="selected-country"
+            id="selectedCountry"
+          ></p>
 
-    <div class="browse-grid">
+          <button
+            class="primary-button next-button"
+            onclick="nextQuestion()"
+          >
+            Continue
+            <span>→</span>
+          </button>
 
-        <button class="browse-button" onclick="quickSearch('international students')">
-            🌍 International Students
+        </div>
+
+
+        <!-- QUESTION 2: EDUCATION LEVEL -->
+
+        <div
+          class="question-screen"
+          id="question2"
+        >
+
+          <span class="question-number">
+            02
+          </span>
+
+          <h2>
+            What are you currently studying?
+          </h2>
+
+          <p>
+            Choose the level that best describes you right now.
+          </p>
+
+          <div class="choice-grid">
+
+            <button
+              class="choice-card"
+              data-value="high-school"
+              onclick="selectEducation(this)"
+            >
+
+              <span class="choice-icon">🏫</span>
+
+              <strong>High School</strong>
+
+              <small>
+                Secondary education
+              </small>
+
+            </button>
+
+            <button
+              class="choice-card"
+              data-value="university"
+              onclick="selectEducation(this)"
+            >
+
+              <span class="choice-icon">🎓</span>
+
+              <strong>University</strong>
+
+              <small>
+                Undergraduate or graduate study
+              </small>
+
+            </button>
+
+          </div>
+
+          <p
+            class="question-error"
+            id="educationError"
+          >
+            Please select an option to continue.
+          </p>
+
+          <div class="question-navigation">
+
+            <button
+              class="back-button"
+              onclick="previousQuestion()"
+            >
+              ← Back
+            </button>
+
+            <button
+              class="primary-button"
+              onclick="nextQuestion()"
+            >
+              Continue
+              <span>→</span>
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- QUESTION 3: YEAR -->
+
+        <div
+          class="question-screen"
+          id="question3"
+        >
+
+          <span class="question-number">
+            03
+          </span>
+
+          <h2>
+            What year are you in?
+          </h2>
+
+          <p>
+            Select your current year of study.
+          </p>
+
+          <div
+            class="choice-grid"
+            id="yearChoices"
+          >
+
+            <!-- Filled by JavaScript -->
+
+          </div>
+
+          <p
+            class="question-error"
+            id="yearError"
+          >
+            Please select your year to continue.
+          </p>
+
+          <div class="question-navigation">
+
+            <button
+              class="back-button"
+              onclick="previousQuestion()"
+            >
+              ← Back
+            </button>
+
+            <button
+              class="primary-button"
+              onclick="nextQuestion()"
+            >
+              Continue
+              <span>→</span>
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- QUESTION 4: AGE -->
+
+        <div
+          class="question-screen"
+          id="question4"
+        >
+
+          <span class="question-number">
+            04
+          </span>
+
+          <h2>
+            How old are you?
+          </h2>
+
+          <p>
+            Age can affect eligibility for certain opportunities,
+            so we'll use it to make your results more relevant.
+          </p>
+
+          <div class="age-input-wrapper">
+
+            <input
+              type="number"
+              id="ageInput"
+              min="12"
+              max="100"
+              placeholder="Enter your age"
+            >
+
+            <span>
+              years old
+            </span>
+
+          </div>
+
+          <p
+            class="question-error"
+            id="ageError"
+          >
+            Please enter a valid age.
+          </p>
+
+          <div class="question-navigation">
+
+            <button
+              class="back-button"
+              onclick="previousQuestion()"
+            >
+              ← Back
+            </button>
+
+            <button
+              class="primary-button"
+              onclick="showResults()"
+            >
+              Find My Opportunities
+              <span>→</span>
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================
+         RESULTS
+    ======================================== -->
+
+    <section id="resultsPage" class="page results-page hidden">
+
+      <div class="results-container">
+
+        <div class="results-header">
+
+          <span class="section-label">
+            YOUR MATCHES
+          </span>
+
+          <h1>
+            Opportunities for you
+          </h1>
+
+          <p id="resultsSummary">
+            Based on your answers, here are opportunities
+            you may be interested in.
+          </p>
+
+          <div
+            class="profile-summary"
+            id="profileSummary"
+          ></div>
+
+        </div>
+
+
+        <!-- Eligibility legend -->
+
+        <div class="eligibility-legend">
+
+          <div>
+            <span class="legend-dot likely"></span>
+            Likely eligible
+          </div>
+
+          <div>
+            <span class="legend-dot check"></span>
+            Check eligibility
+          </div>
+
+          <div>
+            <span class="legend-dot not-eligible"></span>
+            Not currently eligible
+          </div>
+
+        </div>
+
+
+        <!-- Opportunity cards -->
+
+        <div
+          class="opportunity-grid"
+          id="opportunityGrid"
+        >
+
+          <!-- Filled by JavaScript -->
+
+        </div>
+
+
+        <!-- Show more -->
+
+        <button
+          class="show-more-button hidden"
+          id="showMoreButton"
+          onclick="showMoreOpportunities()"
+        >
+          Show More Opportunities
         </button>
 
-        <button class="browse-button" onclick="quickSearch('fully funded')">
-            🎓 Fully Funded
+
+        <!-- Disclaimer -->
+
+        <div class="verification-note">
+
+          <span>ⓘ</span>
+
+          <p>
+            <strong>Always verify before applying.</strong>
+            Eligibility, deadlines, funding, and requirements
+            can change. Always check the official program website
+            for the latest information before making an application.
+          </p>
+
+        </div>
+
+
+        <button
+          class="restart-button"
+          onclick="startQuestionnaire()"
+        >
+          ← Update my answers
         </button>
 
-        <button class="browse-button" onclick="quickSearch('bachelor')">
-            📚 Bachelor's
-        </button>
+      </div>
 
-        <button class="browse-button" onclick="quickSearch('engineering')">
-            ⚙️ Engineering
-        </button>
+    </section>
 
-        <button class="browse-button" onclick="quickSearch('business')">
-            💼 Business
-        </button>
 
-        <button class="browse-button" onclick="quickSearch('science')">
-            🔬 Science
-        </button>
+    <!-- =======================================
+         SAVED OPPORTUNITIES
+    ======================================== -->
 
-        <button class="browse-button" onclick="quickSearch('Japan')">
-            🇯🇵 Japan
-        </button>
+    <section id="savedPage" class="page saved-page hidden">
 
-        <button class="browse-button" onclick="quickSearch('USA')">
-            🇺🇸 USA
-        </button>
+      <div class="results-container">
 
-    </div>
+        <div class="results-header">
 
-</section>
+          <span class="section-label">
+            YOUR SAVED LIST
+          </span>
 
-<section class="section">
+          <h1>
+            Saved Opportunities
+          </h1>
 
-    <h2 id="exploreTitle">Explore Scholarships</h2>
+          <p>
+            Opportunities you save are stored on this device.
+            No account is required.
+          </p>
 
-    <div class="results-info" id="resultsInfo"></div>
+        </div>
 
-    <div id="scholarshipContainer" class="scholarship-grid"></div>
+        <div
+          class="opportunity-grid"
+          id="savedGrid"
+        ></div>
 
-</section>
+        <div
+          class="empty-saved"
+          id="emptySaved"
+        >
 
-<div id="modal" class="modal">
+          <div class="empty-icon">
+            ☆
+          </div>
+
+          <h3>
+            Nothing saved yet
+          </h3>
+
+          <p>
+            When you find an opportunity you like,
+            save it here so you can come back to it later.
+          </p>
+
+          <button
+            class="primary-button"
+            onclick="startQuestionnaire()"
+          >
+            Explore Opportunities
+            <span>→</span>
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =========================================
+       OPPORTUNITY DETAILS MODAL
+  ========================================== -->
+
+  <div
+    class="modal hidden"
+    id="opportunityModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle"
+  >
+
+    <div
+      class="modal-background"
+      onclick="closeOpportunityModal()"
+    ></div>
 
     <div class="modal-content">
 
-        <button class="close" onclick="closeModal()">×</button>
+      <button
+        class="modal-close"
+        onclick="closeOpportunityModal()"
+        aria-label="Close"
+      >
+        ×
+      </button>
 
-        <h2 id="modalTitle"></h2>
+      <div id="modalBody">
 
-        <p id="modalOrganization"></p>
+        <!-- Filled by JavaScript -->
 
-        <p id="modalDestination"></p>
-
-        <p id="modalLevel"></p>
-
-        <p id="modalFunding"></p>
-
-        <p id="modalField"></p>
-
-        <p id="modalDeadline"></p>
-
-        <h3 id="requirementsTitle">Requirements</h3>
-
-        <p id="modalRequirements"></p>
-
-        <h3 id="descriptionTitle">About this opportunity</h3>
-
-        <p id="modalDescription"></p>
-
-        <a
-            id="modalApplication"
-            class="apply-button"
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            Official application
-        </a>
+      </div>
 
     </div>
 
-</div>
+  </div>
 
-<footer>
-    <p>Scholarships for Students</p>
-    <p>Helping students discover opportunities around the world.</p>
-</footer>
 
-<script>
+  <!-- =========================================
+       FOOTER
+  ========================================== -->
 
-/*
-====================================================
-SCHOLARSHIP DATABASE
-====================================================
+  <footer>
 
-Important:
-The information below uses real scholarship/program names.
-Deadlines are intentionally written as "Check official page"
-because scholarship cycles and deadlines can change.
+    <div class="footer-brand">
+      Scholarships for Students
+    </div>
 
-Before publishing individual opportunities, verify their
-current eligibility and deadline on the official provider page.
-*/
+    <p>
+      Helping students discover opportunities
+      around the world.
+    </p>
 
-const scholarships = [
+    <a href="mailto:hafsaelmasmoudi2@gmail.com">
+      Contact us
+    </a>
 
-    {
-        name: "MEXT Scholarship",
-        country: "Japan",
-        university: "Japanese Government",
-        level: "Bachelor",
-        funding: "Fully funded",
-        field: "Multiple fields",
-        deadline: "Check official page",
-        description:
-            "The Japanese Government MEXT scholarship program supports international students pursuing study in Japan. Different MEXT categories have different eligibility rules and application procedures.",
-        requirements:
-            "Eligibility depends on the MEXT category and applicant's nationality, age, academic background, and intended study.",
-        keywords:
-            "Japan Japanese government MEXT international students undergraduate bachelor university fully funded scholarship science engineering humanities",
-        application:
-            "https://www.studyinjapan.go.jp/en/"
-    },
+    <div class="footer-bottom">
 
-    {
-        name: "Türkiye Scholarships",
-        country: "Türkiye",
-        university: "Government of Türkiye",
-        level: "Bachelor",
-        funding: "Fully funded",
-        field: "Multiple fields",
-        deadline: "Check official page",
-        description:
-            "Türkiye Scholarships is a government scholarship program for international students. Opportunities are available across different study levels and academic fields.",
-        requirements:
-            "Requirements depend on the degree level and program. Applicants should check the current official eligibility rules.",
-        keywords:
-            "Turkey Türkiye Turkish government international students undergraduate bachelor university fully funded scholarship medicine engineering business",
-        application:
-            "https://www.turkiyeburslari.gov.tr/"
-    },
+      <span>
+        © 2026 Scholarships for Students
+      </span>
 
-    {
-        name: "Lester B. Pearson International Scholarship",
-        country: "Canada",
-        university: "University of Toronto",
-        level: "Bachelor",
-        funding: "Fully funded",
-        field: "Multiple fields",
-        deadline: "Check official page",
-        description:
-            "A University of Toronto scholarship program for exceptional international students entering undergraduate study.",
-        requirements:
-            "Applicants must meet the university's current eligibility requirements and nomination/application procedures.",
-        keywords:
-            "Canada Toronto University undergraduate international students bachelor full scholarship fully funded university scholarship",
-        application:
-            "https://future.utoronto.ca/pearson/"
-    },
+      <span>
+        Information is provided for guidance only.
+      </span>
 
-    {
-        name: "Reach Oxford Scholarship",
-        country: "United Kingdom",
-        university: "University of Oxford",
-        level: "Bachelor",
-        funding: "Fully funded",
-        field: "Multiple fields",
-        deadline: "Check official page",
-        description:
-            "A scholarship opportunity associated with undergraduate study at the University of Oxford for students who meet the program's eligibility requirements.",
-        requirements:
-            "Eligibility and application requirements vary and should be checked on the official Oxford scholarship information.",
-        keywords:
-            "UK United Kingdom Oxford undergraduate bachelor international students full funding university scholarship",
-        application:
-            "https://www.ox.ac.uk/admissions/undergraduate/fees-and-funding/oxford-support"
-    },
+    </div>
 
-    {
-        name: "Chevening Scholarships",
-        country: "United Kingdom",
-        university: "UK Government",
-        level: "Master",
-        funding: "Fully funded",
-        field: "Multiple fields",
-        deadline: "Check official page",
-        description:
-            "A UK government scholarship program for eligible international students pursuing master's study in the United Kingdom.",
-        requirements:
-            "Applicants must meet the current Chevening eligibility and application requirements.",
-        keywords:
-            "UK Britain United Kingdom master's graduate international students government scholarship fully funded leadership",
-        application:
-            "https://www.chevening.org/"
-    },
+  </footer>
 
-    {
-        name: "Erasmus Mundus Joint Masters",
-        country: "Europe",
-        university: "European Union / participating universities",
-        level: "Master",
-        funding: "Fully funded",
-        field: "Multiple fields",
-        deadline: "Varies by programme",
-        description:
-            "Joint master's programmes delivered by groups of universities in different countries. Scholarship availability and requirements depend on the specific programme.",
-        requirements:
-            "Requirements, participating universities, fields, and deadlines depend on the individual Erasmus Mundus programme.",
-        keywords:
-            "Europe European Union Erasmus Mundus master's graduate international students fully funded scholarship universities multiple countries",
-        application:
-            "https://education.ec.europa.eu/education-levels/higher-education/erasmus-mundus-joint-masters"
-    },
 
-    {
-        name: "Fulbright Foreign Student Program",
-        country: "USA",
-        university: "Fulbright Program",
-        level: "Graduate",
-        funding: "Varies",
-        field: "Multiple fields",
-        deadline: "Varies by country",
-        description:
-            "A major international educational exchange program supporting eligible international students for graduate-level study and research in the United States.",
-        requirements:
-            "Eligibility, application procedures, and deadlines vary by applicant country and program.",
-        keywords:
-            "USA United States America Fulbright international students graduate master's doctorate scholarship university research",
-        application:
-            "https://foreign.fulbrightonline.org/"
-    },
+  <!-- JavaScript -->
 
-    {
-        name: "DAAD Scholarships",
-        country: "Germany",
-        university: "DAAD",
-        level: "Graduate",
-        funding: "Varies",
-        field: "Multiple fields",
-        deadline: "Varies by programme",
-        description:
-            "DAAD provides a range of scholarship opportunities for international students and researchers. Each programme has its own eligibility rules and deadline.",
-        requirements:
-            "Requirements depend on the specific DAAD scholarship and degree programme.",
-        keywords:
-            "Germany German DAAD international students master's doctorate graduate university scholarship research Europe",
-        application:
-            "https://www.daad.de/en/studying-in-germany/scholarships/"
-    }
-
-];
-
-let currentLanguage = "en";
-
-const translations = {
-    en: {
-        mainTitle: "Scholarships for Students",
-        mainSubtitle:
-            "Discover scholarship opportunities from universities, governments, and organizations around the world.",
-        searchPlaceholder:
-            "Search scholarships, universities, countries, fields...",
-        searchButton: "Search",
-        exploreTitle: "Explore Scholarships",
-        browseTitle: "Browse by",
-        results: "opportunities found",
-        requirements: "Requirements",
-        about: "About this opportunity",
-        official: "Official application",
-        noResults:
-            "No scholarships matched your search. Try different words or remove a filter."
-    },
-
-    ar: {
-        mainTitle: "منح دراسية للطلاب",
-        mainSubtitle:
-            "اكتشف فرص المنح الدراسية من الجامعات والحكومات والمنظمات حول العالم.",
-        searchPlaceholder:
-            "ابحث عن المنح أو الجامعات أو الدول أو المجالات...",
-        searchButton: "بحث",
-        exploreTitle: "استكشف المنح الدراسية",
-        browseTitle: "تصفح حسب",
-        results: "فرص متاحة",
-        requirements: "المتطلبات",
-        about: "حول هذه الفرصة",
-        official: "صفحة التقديم الرسمية",
-        noResults:
-            "لم نجد منحًا تطابق بحثك. جرّب كلمات مختلفة أو أزل أحد الفلاتر."
-    }
-};
-
-
-/*
-====================================================
-SEARCH SYSTEM
-====================================================
-
-Instead of requiring an exact search such as "USA",
-the website searches the entire scholarship record.
-
-Examples:
-
-"universities with scholarships"
-"Japan engineering"
-"fully funded"
-"international students"
-"business bachelor"
-"UK scholarships"
-"government scholarship"
-
-The search also understands common variations.
-*/
-
-const searchAliases = {
-
-    scholarship: [
-        "scholarship",
-        "scholarships",
-        "grant",
-        "grants",
-        "financial aid",
-        "funding"
-    ],
-
-    university: [
-        "university",
-        "universities",
-        "college",
-        "colleges",
-        "institution",
-        "institutions"
-    ],
-
-    international: [
-        "international",
-        "foreign",
-        "overseas",
-        "international students"
-    ],
-
-    bachelor: [
-        "bachelor",
-        "bachelors",
-        "undergraduate",
-        "undergrad",
-        "first degree"
-    ],
-
-    master: [
-        "master",
-        "masters",
-        "postgraduate",
-        "graduate"
-    ],
-
-    doctorate: [
-        "doctorate",
-        "doctoral",
-        "phd",
-        "p.h.d"
-    ],
-
-    fullyFunded: [
-        "fully funded",
-        "full funding",
-        "full scholarship",
-        "all expenses",
-        "tuition and living"
-    ],
-
-    engineering: [
-        "engineering",
-        "engineer",
-        "technology",
-        "technical",
-        "stem"
-    ],
-
-    business: [
-        "business",
-        "management",
-        "finance",
-        "economics",
-        "entrepreneurship"
-    ],
-
-    science: [
-        "science",
-        "scientific",
-        "biology",
-        "chemistry",
-        "physics",
-        "mathematics",
-        "math"
-    ]
-};
-
-
-function normalizeText(text) {
-
-    return String(text)
-     toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/[^\p{L}\p{N}\s]/gu, " ")
-        .replace(/\s+/g, " ")
-        .trim();
-
-}
-
-
-function expandSearchTerms(query) {
-
-    const normalized = normalizeText(query);
-
-    let terms = [normalized];
-
-    for (const group in searchAliases) {
-
-        const aliases = searchAliases[group];
-
-        if (aliases.some(alias => normalized.includes(normalizeText(alias)))) {
-
-            terms = terms.concat(aliases.map(normalizeText));
-
-        }
-
-    }
-
-    return [...new Set(terms)];
-
-}
-
-
-function scholarshipMatchesSearch(scholarship, query) {
-
-    if (!query) {
-        return true;
-    }
-
-    const searchableText = normalizeText(
-        [
-            scholarship.name,
-            scholarship.country,
-            scholarship.university,
-            scholarship.level,
-            scholarship.funding,
-            scholarship.field,
-            scholarship.deadline,
-            scholarship.description,
-            scholarship.requirements,
-            scholarship.keywords
-        ].join(" ")
-    );
-
-    const terms = expandSearchTerms(query);
-
-    return terms.some(term =>
-        term.length > 1 && searchableText.includes(term)
-    );
-}
-
-
-function applyFilters(list) {
-
-    const country =
-        document.getElementById("countryFilter").value;
-
-    const level =
-        document.getElementById("levelFilter").value;
-
-    const funding =
-        document.getElementById("fundingFilter").value;
-
-    return list.filter(scholarship => {
-
-        const countryMatch =
-            !country ||
-            scholarship.country === country;
-
-        const levelMatch =
-            !level ||
-            scholarship.level === level ||
-            (
-                level === "Graduate" &&
-                (
-                    scholarship.level === "Master" ||
-                    scholarship.level === "Doctorate" ||
-                    scholarship.level === "Graduate"
-                )
-            );
-
-        const fundingMatch =
-            !funding ||
-            scholarship.funding === funding;
-
-        return countryMatch && levelMatch && fundingMatch;
-
-    });
-}
-
-
-function getFilteredScholarships() {
-
-    const query =
-        document.getElementById("searchInput").value;
-
-    const searched =
-        scholarships.filter(scholarship =>
-            scholarshipMatchesSearch(scholarship, query)
-        );
-
-    return applyFilters(searched);
-
-}
-
-
-/*
-====================================================
-DISPLAY
-====================================================
-*/
-
-function displayScholarships(list) {
-
-    const container =
-        document.getElementById("scholarshipContainer");
-
-    const info =
-        document.getElementById("resultsInfo");
-
-    container.innerHTML = "";
-
-    const language = translations[currentLanguage];
-
-    info.textContent =
-        `${list.length} ${language.results}`;
-
-    if (list.length === 0) {
-
-        container.innerHTML = `
-            <div class="no-results" style="grid-column: 1 / -1;">
-                ${language.noResults}
-            </div>
-        `;
-
-        return;
-    }
-
-    list.forEach((scholarship, index) => {
-
-        const card = document.createElement("div");
-
-        card.className = "card";
-
-        card.innerHTML = `
-
-            <h3>${scholarship.name}</h3>
-
-            <div class="organization">
-                ${scholarship.university}
-            </div>
-
-            <div class="tags">
-
-                <span class="tag">
-                    ${scholarship.country}
-                </span>
-
-                <span class="tag">
-                    ${scholarship.level}
-                </span>
-
-                <span class="tag">
-                    ${scholarship.funding}
-                </span>
-
-            </div>
-
-            <p class="card-description">
-                ${scholarship.description}
-            </p>
-
-            <button onclick="openModal(${index})">
-                ${currentLanguage === "en"
-                    ? "View details"
-                    : "عرض التفاصيل"}
-            </button>
-        `;
-
-        container.appendChild(card);
-
-    });
-
-}
-
-
-/*
-====================================================
-MODAL
-====================================================
-*/
-
-function openModal(index) {
-
-    const scholarship = scholarships[index];
-
-    document.getElementById("modalTitle").textContent =
-        scholarship.name;
-
-    document.getElementById("modalOrganization").innerHTML =
-        `<strong>${currentLanguage === "en"
-            ? "Organization:"
-            : "الجهة:"}</strong> ${scholarship.university}`;
-
-    document.getElementById("modalDestination").innerHTML =
-        `<strong>${currentLanguage === "en"
-            ? "Destination:"
-            : "الوجهة:"}</strong> ${scholarship.country}`;
-
-    document.getElementById("modalLevel").innerHTML =
-        `<strong>${currentLanguage === "en"
-            ? "Study level:"
-            : "المستوى الدراسي:"}</strong> ${scholarship.level}`;
-
-    document.getElementById("modalFunding").innerHTML =
-        `<strong>${currentLanguage === "en"
-            ? "Funding:"
-            : "التمويل:"}</strong> ${scholarship.funding}`;
-
-    document.getElementById("modalField").innerHTML =
-        `<strong>${currentLanguage === "en"
-            ? "Field:"
-            : "المجال:"}</strong> ${scholarship.field}`;
-
-    document.getElementById("modalDeadline").innerHTML =
-        `<strong>${currentLanguage === "en"
-            ? "Deadline:"
-            : "الموعد النهائي:"}</strong> ${scholarship.deadline}`;
-
-    document.getElementById("modalRequirements").textContent =
-        scholarship.requirements;
-
-    document.getElementById("modalDescription").textContent =
-        scholarship.description;
-
-    document.getElementById("modalApplication").href =
-        scholarship.application;
-
-    document.getElementById("modal").style.display =
-        "block";
-}
-
-
-function closeModal() {
-
-    document.getElementById("modal").style.display =
-        "none";
-
-}
-
-
-window.addEventListener("click", function(event) {
-
-    const modal = document.getElementById("modal");
-
-    if (event.target === modal) {
-        closeModal();
-    }
-
-});
-
-
-/*
-====================================================
-SEARCH + FILTER CONTROLS
-====================================================
-*/
-
-document.getElementById("searchButton")
-    .addEventListener("click", function() {
-
-        displayScholarships(
-            getFilteredScholarships()
-        );
-
-    });
-
-
-document.getElementById("searchInput")
-    .addEventListener("keydown", function(event) {
-
-        if (event.key === "Enter") {
-
-            displayScholarships(
-                getFilteredScholarships()
-            );
-
-        }
-
-    });
-
-
-document.getElementById("countryFilter")
-    .addEventListener("change", function() {
-
-        displayScholarships(
-            getFilteredScholarships()
-        );
-
-    });
-
-
-document.getElementById("levelFilter")
-    .addEventListener("change", function() {
-
-        displayScholarships(
-            getFilteredScholarships()
-        );
-
-    });
-
-
-document.getElementById("fundingFilter")
-    .addEventListener("change", function() {
-
-        displayScholarships(
-            getFilteredScholarships()
-        );
-
-    });
-
-
-function quickSearch(text) {
-
-    document.getElementById("searchInput").value =
-        text;
-
-    displayScholarships(
-        getFilteredScholarships()
-    );
-
-}
-
-
-/*
-====================================================
-LANGUAGE SWITCH
-====================================================
-*/
-
-document.getElementById("languageButton")
-    .addEventListener("click", function() {
-
-        currentLanguage =
-            currentLanguage === "en"
-                ? "ar"
-                : "en";
-
-        const t =
-            translations[currentLanguage];
-
-        document.documentElement.lang =
-            currentLanguage;
-
-        document.documentElement.dir =
-            currentLanguage === "ar"
-                ? "rtl"
-                : "ltr";
-
-        document.getElementById("mainTitle")
-            .textContent = t.mainTitle;
-
-        document.getElementById("mainSubtitle")
-            .textContent = t.mainSubtitle;
-
-        document.getElementById("searchInput")
-            .placeholder = t.searchPlaceholder;
-
-        document.getElementById("searchButton")
-            .textContent = t.searchButton;
-
-        document.getElementById("exploreTitle")
-            .textContent = t.exploreTitle;
-
-        document.getElementById("browseTitle")
-            .textContent = t.browseTitle;
-
-        document.getElementById("requirementsTitle")
-            .textContent = t.requirements;
-
-        document.getElementById("descriptionTitle")
-            .textContent = t.about;
-
-        document.getElementById("modalApplication")
-            .textContent = t.official;
-
-        document.getElementById("languageButton")
-            .textContent =
-                currentLanguage === "en"
-                    ? "العربية"
-                    : "English";
-
-        displayScholarships(
-            getFilteredScholarships()
-        );
-
-    });
-
-
-/*
-====================================================
-INITIAL LOAD
-====================================================
-*/
-
-displayScholarships(scholarships);
-
-</script>
+  <script src="script.js"></script>
 
 </body>
-</html>        
-
-        
-                
-    
+            </html>
